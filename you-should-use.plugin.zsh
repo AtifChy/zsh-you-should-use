@@ -180,6 +180,11 @@ function _check_global_aliases() {
             continue
         fi
 
+        # only show tip for abbreviations when they are not used
+        if [[ -n ${_zsh_mini_abbrs[$key]} ]] && (( _ZSH_MINI_ABBR_STATUS )); then
+          continue
+        fi
+
         if [[ "$typed" = *" $value "* || \
               "$typed" = *" $value" || \
               "$typed" = "$value "* || \
@@ -218,6 +223,11 @@ function _check_aliases() {
         # Skip ignored aliases
         if [[ ${YSU_IGNORED_ALIASES[(r)$key]} == "$key" ]]; then
             continue
+        fi
+
+        # only show tip for abbreviations when they are not used
+        if [[ -n ${_zsh_mini_abbrs[$key]} ]] && (( _ZSH_MINI_ABBR_STATUS )); then
+          continue
         fi
 
         if [[ "$typed" = "$value" || "$typed" = "$value "* ]]; then
