@@ -2,7 +2,7 @@
 
 export YSU_VERSION='1.9.0'
 
-if ! type "tput" > /dev/null; then
+if (( ! ${+commands[tput]} )); then
     printf "WARNING: tput command not found on your PATH.\n"
     printf "zsh-you-should-use will fallback to uncoloured messages\n"
 else
