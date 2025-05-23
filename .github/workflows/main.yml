@@ -39,7 +39,7 @@ jobs:
           apt-get install -y curl git ncurses-bin
           apt-get clean
       - name: Mark repository as safe
-        run: git config --global --add safe.directory $GITHUB_WORPKSPACE
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
 
       - uses: actions/checkout@v4
         with:
