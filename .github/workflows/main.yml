@@ -38,6 +38,8 @@ jobs:
           apt-get update
           apt-get install -y curl git ncurses-bin
           apt-get clean
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory $GITHUB_WORPKSPACE
 
       - uses: actions/checkout@v4
         with:
