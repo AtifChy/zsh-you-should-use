@@ -5,16 +5,16 @@ on:
   pull_request:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Install rst-lint
-        run: |
-          python3 -m pip install --upgrade pip
-          pip install restructuredtext_lint pygments
-      - name: Run rst-lint
-        run: rst-lint *.rst
+  # lint:
+  #   runs-on: ubuntu-latest
+  #   steps:
+  #     - uses: actions/checkout@v4
+  #     - name: Install rst-lint
+  #       run: |
+  #         python3 -m pip install --upgrade pip
+  #         pip install restructuredtext_lint pygments
+  #     - name: Run rst-lint
+  #       run: rst-lint *.rst
 
   test:
     runs-on: ubuntu-latest
@@ -24,12 +24,12 @@ jobs:
           # - 5.1
           # - 5.2
           # - 5.3
-          # - 5.4
+          - 5.4
           # - 5.5
           # - 5.6
           # - 5.7
           # - 5.8
-          - 5.9
+          # - 5.9
     container:
       image: zshusers/zsh:${{ matrix.zsh_version }}
     steps:

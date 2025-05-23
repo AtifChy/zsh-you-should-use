@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/usr/bin/env zsh
 
 export YSU_VERSION='1.9.5'
 
@@ -245,7 +245,7 @@ function _check_aliases() {
                 best_match="$key"
                 best_match_value="$value"
             # on equal length, choose the shortest alias
-            elif [[ "${#value}" -eq "${#best_match}" && ${#key} -lt "${#best_match}" ]]; then
+            elif [[ "${#value}" -eq "${#best_match}" && "${#key}" -lt "${#best_match}" ]]; then
                 best_match="$key"
                 best_match_value="$value"
             fi
