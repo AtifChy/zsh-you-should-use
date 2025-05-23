@@ -42,8 +42,8 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      # - name: Mark repository as safe
-      # run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - name: Download ZUnit and Revolver
         run: |
           mkdir -p ~/bin
