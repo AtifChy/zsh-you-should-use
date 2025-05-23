@@ -1,0 +1,58 @@
+name: Tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install rst-lint
+        run: |
+          python3 -m pip install --upgrade pip
+          pip install restructuredtext_lint pygments
+      - name: Run rst-lint
+        run: rst-lint *.rst
+
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        zsh_version:
+          - 5.1
+          - 5.2
+          - 5.3
+          - 5.4
+          - 5.5
+          - 5.6
+          - 5.7
+          - 5.8
+          - 5.9
+    container:
+      image: zshusers/zsh:${{ matrix.zsh_version }}
+    steps:
+      - name: Install dependencies
+        run: |
+          apt-get update
+          apt-get install -y curl git ncurses-bin
+          apt-get clean
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Mark repository as safe
+        run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - name: Download ZUnit and Revolver
+        run: |
+          mkdir -p ~/bin
+          curl -fsSL https://raw.githubusercontent.com/molovo/revolver/master/revolver -o ~/bin/revolver
+          curl -fsSL https://github.com/molovo/zunit/releases/download/v0.8.2/zunit -o ~/bin/zunit
+          chmod u+x ~/bin/revolver
+          chmod u+x ~/bin/zunit
+      - name: Run ZUnit tests
+        run: |
+          export TERM="xterm-256color"
+          export PATH="$HOME/bin:$PATH"
+          zunit --verbose

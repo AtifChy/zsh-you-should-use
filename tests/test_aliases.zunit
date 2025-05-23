@@ -150,8 +150,8 @@
 }
 
 @test 'dont display recommendations for an alias if it is used - 4' {
-    alias ..='cd ..'
-    alias cd..='cd ..'
+    alias c='cd ..'
+    alias cb='cd ..'
 
     run _check_aliases '..' 'cd ..'
 
