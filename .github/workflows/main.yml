@@ -33,18 +33,17 @@ jobs:
     container:
       image: zshusers/zsh:${{ matrix.zsh_version }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-          fetch-tags: true
       - name: Install dependencies
         run: |
           apt-get update
           apt-get install -y curl git ncurses-bin
           apt-get clean
-        # run: git config --global --add safe.directory $GITHUB_WORKSPACE
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       # - name: Mark repository as safe
+      # run: git config --global --add safe.directory $GITHUB_WORKSPACE
       - name: Download ZUnit and Revolver
         run: |
           mkdir -p ~/bin
